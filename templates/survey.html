@@ -107,46 +107,47 @@
     <!-- Main content -->
     <main>
         <h1>Survey</h1>
+    
+        {% if message %}
+            <p style="color: green; font-weight: bold;">{{ message }}</p>
+        {% endif %}
+    
+        <!-- Survey Form -->
+        <form action="/survey" method="POST">
+            <!-- Get Location Button -->
+            <button type="button" onclick="getLocation()">Get Current Location</button>
+            <p id="locationStatus"></p>
+            
+            <!-- Latitude Input -->
+            <label for="latitude">Latitude:</label>
+            <input type="text" name="latitude" id="latitudeInput" readonly>
+    
+            <!-- Longitude Input -->
+            <label for="longitude">Longitude:</label>
+            <input type="text" name="longitude" id="longitudeInput" readonly>
+    
+            <!-- Pollution Rating -->
+            <h3>How polluted is your environment on a scale of 0 to 5? </h3>
+            <input type="range" name="rating" id="ratingSlider" min="0" max="5" step="1" value="0" oninput="updateRatingValue(this.value)">
+            <p>Selected Rating: <span id="ratingValue">0</span></p>
 
-        <!-- Get Location Button -->
-        <button onclick="getLocation()">Get Current Location</button>
-        <p id="locationStatus"></p>
-        
-        <!-- Latitude Input -->
-        <label for="latitude">Latitude:</label>
-        <input type="text" name="latitudeInput" id="latitudeInput" readonly>
-
-        <!-- Longitude Input -->
-        <label for="longitude">Longitude:</label>
-        <input type="text" name="longitudeInput" id="longitudeInput" readonly>
-
-        <!-- Pollution Rating -->
-        <h3>How polluted is your environment on a scale of 0 to 5?</h3>
-        <label for="R0">0:</label>
-        <input type="radio" name="litterLevel" id="R0" value="0">
-        
-        <label for="R1">1:</label>
-        <input type="radio" name="litterLevel" id="R1" value="1">
-        
-        <label for="R2">2:</label>
-        <input type="radio" name="litterLevel" id="R2" value="2">
-        
-        <label for="R3">3:</label>
-        <input type="radio" name="litterLevel" id="R3" value="3">
-        
-        <label for="R4">4:</label>
-        <input type="radio" name="litterLevel" id="R4" value="4">
-        
-        <label for="R5">5:</label>
-        <input type="radio" name="litterLevel" id="R5" value="5">
-
-        <!-- Photo Upload -->
-        <label for="photoUpload">Upload a Photo (Optional):</label>
-        <input type="file" id="photoUpload" name="photoUpload" accept="image/*">
-
-        <!-- Additional Comments -->
-        <label for="comments">Additional Comments (Optional):</label>
-        <input type="text" name="commentsInput" id="commentsInput">
+            <script>
+                function updateRatingValue(value) {
+                    document.getElementById('ratingValue').textContent = value;
+                }
+            </script>
+    
+            <!-- Photo Upload -->
+            <label for="photoUpload">Upload a Photo (Optional):</label>
+            <input type="file" id="photoUpload" name="photoUpload" accept="image/*">
+    
+            <!-- Additional Comments -->
+            <label for="comments">Additional Comments (Optional):</label>
+            <input type="text" name="response" id="response">
+            
+            <!-- Submit Button -->
+            <button type="submit" style="text-align: center;"> Submit </button>
+        </form>
     </main>
 
     <script>

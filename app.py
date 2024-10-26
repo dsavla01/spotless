@@ -1,27 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, g
 import sqlite3
 import os
+from __init__ import create_app  # Import create_app from init.py
 
-app = Flask(__name__, template_folder = "templates")
-
-DATABASE = 'survey.db'
-app.config['DATABASE'] = DATABASE
-
-
+app = create_app()  # Call create_app to initialize the app
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/survey")
-def survey():
-    return render_template("survey.html")
-
 @app.route("/heatmap")
 def heatmap():
     return render_template("heatmap.html")
-
-
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -32,12 +22,6 @@ def get_db():
         )
         db.row_factory = sqlite3.Row
     return db
-
-def init_db():
-    with app.app_context():
-        db = get_db()
-        with app.open_resource('schema.sql') as f:
-            db.executescript(f.read().decode('utf-8'))
 
 @app.route("/survey", methods=["GET", "POST"])
 def survey():
@@ -50,19 +34,14 @@ def survey():
         db = get_db()
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO userinfo (longitude, latitude, response, rating) VALUES (?, ?, ?, ?)",
+            "INSERT INTO surveyInfo (longitude, latitude, response, rating) VALUES (?, ?, ?, ?)",
             (longitude, latitude, response, rating),
         )
         db.commit()
         
-        return "Data added successfully!"  # Or redirect to another page as needed
+        return render_template("survey.html", message="Response recorded! Return to homepage, view our heat map that tracks pollution, or check out clean up opportunities near you.")
 
     return render_template("survey.html")
-
-@app.route("/heatmap")
-def heatmap():
-    return render_template("heatmap.html")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
