@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey - Spotless</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --wp--preset--color--primary: #0693e3;
+            --wp--preset--color--secondary: #01283c;
+            --wp--preset--color--white: #ffffff; /* Added white color variable */
+            --wp--preset--font-size--large: 2.4rem;
+            --wp--preset--font-size--medium: 1.8rem;
+            --wp--preset--font-size--small: 1.3rem;
+            --wp--preset--spacing--default: 1rem;
+            --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+            --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 62.5%;
+            color: var(--wp--preset--color--secondary);
+            background-color: var(--wp--preset--color--white);
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple);
+            padding: var(--wp--preset--spacing--default);
+            box-shadow: var(--wp--preset--shadow--natural);
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav ul li {
+            margin-right: var(--wp--preset--spacing--default);
+        }
+        nav ul li a {
+            color: var(--wp--preset--color--white);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: var(--wp--preset--font-size--medium);
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--wp--preset--color--vivid-purple);
+        }
+
+        /* Main content styling */
+        main {
+            padding: var(--wp--preset--spacing--default);
+            text-align: center;
+            font-size: var(--wp--preset--font-size--small);
+        }
+        h1 {
+            font-size: var(--wp--preset--font-size--large);
+            margin-top: var(--wp--preset--spacing--default);
+            color: var(--wp--preset--color--vivid-purple);
+        }
+        p {
+            font-size: var(--wp--preset--font-size--medium);
+            color: var(--wp--preset--color--secondary);
+        }
+
+        /* Form Styles */
+        label {
+            display: block;
+            margin-top: var(--wp--preset--spacing--default);
+        }
+        input[type="text"], input[type="radio"] {
+            margin: var(--wp--preset--spacing--default) 0;
+        }
+
+        /* Animation */
+        h1, p {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <h1>Spotless</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/survey">Survey</a></li>
+            <li><a href="/heatmap">HeatMap</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main content -->
+    <main>
+        <h1>Survey</h1>
+
+        <!-- Longitude Input -->
+        <label for="longitude">Longitude:</label>
+        <input type="text" name="longitudeInput" id="longitudeInput">
+
+        <!-- Latitude Input -->
+        <label for="latitude">Latitude:</label>
+        <input type="text" name="latitudeInput" id="latitudeInput">
+
+        <!-- Pollution Rating -->
+        <h3>How polluted is your environment on a scale of 0 to 5?</h3>
+        <label for="R0">0:</label>
+        <input type="radio" name="litterLevel" id="R0" value="0">
+        
+        <label for="R1">1:</label>
+        <input type="radio" name="litterLevel" id="R1" value="1">
+        
+        <label for="R2">2:</label>
+        <input type="radio" name="litterLevel" id="R2" value="2">
+        
+        <label for="R3">3:</label>
+        <input type="radio" name="litterLevel" id="R3" value="3">
+        
+        <label for="R4">4:</label>
+        <input type="radio" name="litterLevel" id="R4" value="4">
+        
+        <label for="R5">5:</label>
+        <input type="radio" name="litterLevel" id="R5" value="5">
+
+        <!-- Additional Comments -->
+        <label for="comments">Additional Comments (Optional):</label>
+        <input type="text" name="commentsInput" id="commentsInput">
+    </main>
+
+</body>
+</html>
