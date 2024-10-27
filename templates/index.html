@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Geologica' rel='stylesheet'>  
-    <link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet'>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotless</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Geologica" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">  
+
+    <!-- CSS Styling -->
     <style>
-        
         :root {
             --wp--preset--color--primary: #0693e3;
-            --wp--preset--color--secondary: #01283c;
+            --wp--preset--color--secondary: #021131; /* Navy blue color */
+            --wp--preset--color--vivid-purple: #6674e1;
+            --wp--preset--color--white: #ffffff;
             --wp--preset--font-size--large: 2.4rem;
             --wp--preset--font-size--medium: 1.8rem;
             --wp--preset--font-size--small: 1.3rem;
             --wp--preset--spacing--default: 1rem;
-            --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+            --wp--preset--shadow--natural: 10px 10px 15px rgba(0, 0, 0, 0.2);
             --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
         }
 
@@ -33,15 +38,23 @@
         nav {
             background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple);
             padding: var(--wp--preset--spacing--default);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             box-shadow: var(--wp--preset--shadow--natural);
+        }
+        nav h1 {
+            font-family: 'Geologica', sans-serif;
+            color: var(--wp--preset--color--white);
+            margin: 0;
+            font-size: 2rem;
         }
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: right;
-            align-items: right;
+            align-items: center;
         }
         nav ul li {
             margin-right: var(--wp--preset--spacing--default);
@@ -57,76 +70,124 @@
             color: var(--wp--preset--color--vivid-purple);
         }
 
-        
-        /* Main content styling */
-        main {
-            padding: var(--wp--preset--spacing--default);
+        /* Video Background */
+        #video-background {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #video-background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Overlay styling with higher opacity for testing */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(34, 174, 239, 0), rgba(78, 192, 237, 0)); /* Darker gradient */
+            z-index: 2; /* Place the overlay above the video */
+        }
+
+        /* Mission Text Box */
+        #video-background .mission {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--wp--preset--color--white);
+            background-color: var(--wp--preset--color--secondary); /* Navy blue box */
+            opacity: 0.85;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--wp--preset--shadow--natural);
             text-align: center;
-            font-size: var(--wp--preset--font-size--small);
+            width: 100%;
+            max-width: 600px;
         }
-        h1 {
-            font-size: var(--wp--preset--font-size--large);
-            margin-top: var(--wp--preset--spacing--default);
-            color: var(--wp--preset--color--vivid-purple);
-        }
-        p {
-            font-size: var(--wp--preset--font-size--medium);
-            color: var(--wp--preset--color--secondary);
-        }
-
-        /* Animation
-        h1, p {
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        } */
-        /* Apply fade-in animation only to main content elements */
-    main h1, p {
-        animation: fadeIn 2s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(-10px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in-delayed {
-            opacity: 0; /* Start hidden */
-            animation: fadeIn 2s ease-in-out 3.5s forwards; /* Delay of 3.5s */
-        }
-    .typing {
+        #video-background .mission h1.typing {
             font-family: 'Geologica', sans-serif;
             font-size: var(--wp--preset--font-size--large);
             color: var(--wp--preset--color--vivid-purple);
-            border-right: 2px solid var(--wp--preset--color--secondary);
+            border-right: 2px solid var(--wp--preset--color--white);
             white-space: nowrap;
             overflow: hidden;
-            width: fit-content;  /* Adjusts width to text */
-            margin: 0 auto;  
-            animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+            width: fit-content;
+            margin: 0 auto;
+            animation: typing 1.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+        }
+        #video-background .mission p {
+            font-size: var(--wp--preset--font-size--medium);
+            color: var(--wp--preset--color--white);
+            margin-top: 1rem;
+            animation: fadeIn 2s ease-in-out 1.8s forwards;
+            opacity: 0;
+        }
+        
+        /* Scroll Down Button */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--wp--preset--color--white);
+            text-decoration: none;
+            animation: bounce 2s infinite;
+            z-index: 3;
         }
 
-        /* Typing animation */
+        /* Additional Content */
+        main {
+            padding: 2rem;
+            background-color: 
+#c0d6f5;
+        }
+
+        .content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: var(--wp--preset--font-size--large);
+            color: #2072ff;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            font-size: var(--wp--preset--font-size--medium);
+            color: var(--wp--preset--color--secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Animations */
         @keyframes typing {
             from { width: 0; }
-            to { width: 42%; }
+            to { width: 76%; }
         }
-
-        /* Blinking caret animation */
         @keyframes blink-caret {
             from, to { border-color: transparent; }
-            50% { border-color: var(--wp--preset--color--secondary); }
+            50% { border-color: var(--wp--preset--color--white); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
-<style>
-    /* Apply Geologica font to only the h1 element */
-    h1 {
-        font-family: 'Geologica', sans-serif;
-    }
-</style>
 <body>
 
     <!-- Navbar -->
@@ -139,12 +200,24 @@
         </ul>
     </nav>
 
-    <!-- Main content -->
-    <main>
-        <section id="home">
+    <!-- Video Background Section with Mission Text Overlay -->
+    <section id="video-background">
+        <video muted autoplay loop src="{{ url_for('static', filename='droneshotmp4.mp4') }}"></video>
+        <div class="overlay"></div> <!-- Gradient overlay to fade out bottom 15% -->
+        <div class="mission">
             <h1 class="typing">welcome to our mission.</h1>
-
-            <p class="fade-in-delayed">help us track waste levels across nature spots to keep them clean in the future.</p>
+            <p>help us track waste levels across nature spots to keep them clean in the future.</p>
+        </div>
+    </section>
+    <!-- Additional Content to Enable Scrolling -->
+    <main id="content">
+        <section class="content">
+            <h2>Our Purpose</h2>
+            <p>This section explains the purpose of the project...</p>
+        </section>
+        <section class="content">
+            <h2>Join Us</h2>
+            <p>Here you can add more information or calls to action...</p>
         </section>
     </main>
 

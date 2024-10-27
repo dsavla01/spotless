@@ -107,7 +107,11 @@
                 new google.maps.Marker({
                     position: position,
                     map: map,
-                    title: `Rating: ${survey.rating}, Comment: ${survey.response}`
+                    title: `Rating: ${survey.rating}, Comment: ${survey.response}`,
+                    icon: {
+                        url: 'static/iconTrashCan.png',                        
+                        scaledSize: new google.maps.Size(75, 75)
+}
                 });
                 bounds.extend(position); // Extend bounds to include this marker's location
             });
