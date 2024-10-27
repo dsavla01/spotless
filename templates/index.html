@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Geologica' rel='stylesheet'>  
+    <link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet'>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotless</title>
     <style>
-        /* CSS Variables */
+        
         :root {
             --wp--preset--color--primary: #0693e3;
             --wp--preset--color--secondary: #01283c;
@@ -19,7 +21,7 @@
 
         /* Base Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Exo 2', sans-serif;
             margin: 0;
             padding: 0;
             font-size: 62.5%;
@@ -38,8 +40,8 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: right;
+            align-items: right;
         }
         nav ul li {
             margin-right: var(--wp--preset--spacing--default);
@@ -48,13 +50,14 @@
             color: var(--wp--preset--color--white);
             text-decoration: none;
             font-weight: bold;
-            font-size: var(--wp--preset--font-size--medium);
+            font-size: 1.4rem;
             transition: color 0.3s ease;
         }
         nav ul li a:hover {
             color: var(--wp--preset--color--vivid-purple);
         }
 
+        
         /* Main content styling */
         main {
             padding: var(--wp--preset--spacing--default);
@@ -71,7 +74,7 @@
             color: var(--wp--preset--color--secondary);
         }
 
-        /* Animation */
+        /* Animation
         h1, p {
             animation: fadeIn 1s ease-in-out;
         }
@@ -79,26 +82,69 @@
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        } */
+        /* Apply fade-in animation only to main content elements */
+    main h1, p {
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-delayed {
+            opacity: 0; /* Start hidden */
+            animation: fadeIn 2s ease-in-out 3.5s forwards; /* Delay of 3.5s */
+        }
+    .typing {
+            font-family: 'Geologica', sans-serif;
+            font-size: var(--wp--preset--font-size--large);
+            color: var(--wp--preset--color--vivid-purple);
+            border-right: 2px solid var(--wp--preset--color--secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            width: fit-content;  /* Adjusts width to text */
+            margin: 0 auto;  
+            animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+        }
+
+        /* Typing animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 42%; }
+        }
+
+        /* Blinking caret animation */
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--wp--preset--color--secondary); }
         }
     </style>
 </head>
+<style>
+    /* Apply Geologica font to only the h1 element */
+    h1 {
+        font-family: 'Geologica', sans-serif;
+    }
+</style>
 <body>
 
     <!-- Navbar -->
     <nav>
-        <h1>Spotless</h1>
+        <h1>spotless</h1>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/survey">Survey</a></li>
-            <li><a href="/heatmap">HeatMap</a></li>
+            <li><a href="/">home</a></li>
+            <li><a href="/survey">survey</a></li>
+            <li><a href="/heatmap">heatmap</a></li>
         </ul>
     </nav>
 
     <!-- Main content -->
     <main>
         <section id="home">
-            <h1>Welcome to our mission.</h1>
-            <p>Help us track waste levels across nature spots to keep them clean in the future.</p>
+            <h1 class="typing">welcome to our mission.</h1>
+
+            <p class="fade-in-delayed">help us track waste levels across nature spots to keep them clean in the future.</p>
         </section>
     </main>
 
