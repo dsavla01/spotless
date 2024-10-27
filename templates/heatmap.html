@@ -85,25 +85,40 @@
     <title>Map</title>
     <!--API KEY import-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD18gLeIml76SSnyq2ogIsKmFcnlkxU-Ys"></script>
-    <!--function that initilizes the map on page load-->
+    <!-- Initialize the map and add pins from survey data -->
     <script>
+        // Pass the survey data from Flask to JavaScript as a JSON object
+        const surveyData = JSON.parse('{{ survey_data | tojson | safe }}');
+        
         function initMap() {
-            /*centers the map and grabs map element*/
-            var center = {lat: 40.3997, lng: -74.4204};
-            var map = new google.maps.Map(document.getElementById("map"), {
+            // Initial center coordinates
+            const center = {lat: 40.3997, lng: -74.4204};
+            const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 10,
                 center: center,
             });
-            new google.maps.Marker({
-                position: center,
-                map: map,
+
+            // Set bounds to adjust map to fit all markers
+            const bounds = new google.maps.LatLngBounds();
+
+            // Loop through survey data and add a marker for each survey response
+            surveyData.forEach(survey => {
+                const position = { lat: survey.latitude, lng: survey.longitude };
+                new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: `Rating: ${survey.rating}, Comment: ${survey.response}`
+                });
+                bounds.extend(position); // Extend bounds to include this marker's location
             });
+
+            // Adjust the map to fit all markers
+            map.fitBounds(bounds);
         }
     </script>
 </head>
 <body onload="initMap()">
-     
-    <!-- Navbar!!!CHANGE LATER TO FIT FRONT END -->
+    <!-- Navbar -->
     <nav>
         <h1>Spotless</h1>
         <ul>
@@ -112,8 +127,6 @@
             <li><a href="/heatmap">HeatMap</a></li>
         </ul>
     </nav>
-    <div id="map" style="width: 100%; height: 550pt;"></div>
-
-   
+    <div id="map" style="width: 75%; height: 550pt;"></div>
 </body>
 </html>

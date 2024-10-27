@@ -11,7 +11,20 @@ def home():
 
 @app.route("/heatmap")
 def heatmap():
-    return render_template("heatmap.html")
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT latitude, longitude, rating, response FROM surveyInfo;") #select all columns initially
+    survey_data = [
+        {
+            "latitude": row["latitude"],  #extract info
+            "longitude": row["longitude"],
+            "rating": row["rating"],
+            "response": row["response"]
+        } for row in cursor.fetchall()
+        #each row fetched from the database is rep. as a dictionary  
+        # keys correspond to column names
+    ]
+    return render_template("heatmap.html", survey_data=survey_data)
 
 def get_db():
     db = getattr(g, '_database', None)
